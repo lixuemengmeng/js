@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>水平导航</title>
+	<style >
+	*{
+		margin: 0px;
+		padding: 0px;
+		list-style: none;	
+	}
+	#contener .first{
+		float: left;
+		height: 20px;
+		width: 80px;
+		margin: 2px;
+		border:1px solid #ccc;
+		background: url(img/arrow.jpg) no-repeat right 5px;
+	}
+	#contener .second{
+		text-align: center;
+		display: none;
+
+	}
+	</style>
+
+</head>
+<body>
+<div id="contener">
+	<ul>
+		<li class="first">item1
+			  <ul class="second">
+				<li>111</li>
+				<li>222</li>
+				<li>333</li>
+				<li>444</li>
+			  </ul>
+	    </li>
+		<li class="first">item2
+			<ul class="second">
+				<li>111</li>
+				<li>222</li>
+				<li>333</li>
+				<li>444</li>
+			</ul>
+		</li>
+		<li class="first">item3
+			<ul class="second">
+				<li>111</li>
+				<li>222</li>
+				<li>333</li>
+				<li>444</li>
+			</ul>
+		</li>
+		<li class="first">item4
+			<ul class="second">
+				<li>111</li>
+				<li>222</li>
+				<li>333</li>
+				<li>444</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<script >
+
+	var oUl=document.getElementById("contener");
+	var aLi=oUl.getElementsByTagName("li");
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].onmouseover=function(){
+			var oUl2=this.getElementsByTagName("ul")[0];
+			oUl2.style.display="block";
+			this.style.backgroundPosition="right -15px"
+		};
+		aLi[i].onmouseout=function(){
+			var oUl2=this.getElementsByTagName("ul")[0];
+			oUl2.style.display="none";
+			this.style.backgroundPosition="right 5px"
+		};
+	}
+</script>
+</body>
+</html>
