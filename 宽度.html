@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>宽度变化</title>
+	<style >
+	div{
+		width: 100px;
+		height: 50px;
+		margin-bottom: 10px;
+		background: red;
+	/*	position: absolute;*/
+	}
+	</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<script >
+	var aDiv=document.getElementsByTagName("div");
+	for(var i=0;i<aDiv.length;i++){
+		aDiv[i].timer=null;
+		aDiv[i].onmouseover=function(){
+			 var that=this;
+			 	clearInterval(this.timer);
+			this.timer=setInterval(function(){
+
+				if(that.offsetWidth>=300){
+					clearInterval(that.timer);
+				}
+			that.style.width=that.offsetWidth +10+"px";
+			},50)
+		};
+			aDiv[i].onmouseout=function(){
+			 var that=this;
+			 	clearInterval(this.timer);
+			this.timer=setInterval(function(){
+
+				if(that.offsetWidth<=100){
+					clearInterval(that.timer);
+				}
+			that.style.width=that.offsetWidth -10+"px";
+			},50)
+		};
+		
+	}
+	</script>
+</body>
+</html>
