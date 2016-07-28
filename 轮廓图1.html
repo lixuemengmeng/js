@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>轮廓图</title>
+	<style >
+	*{
+		margin: 0px;
+		padding: 0px;
+	}
+	#continer{
+		width: 520px;
+		height: 280px;
+		margin: 200px 200px;
+		position: relative;
+
+	}
+	#imgs img{
+		display: none;
+
+	}
+	#imgs #img1{
+		display: block;
+	}
+	#tab{
+		position: absolute;
+		bottom:10px;
+		right:10px;
+		list-style: none;
+
+
+	}
+	#tab li{
+		float: left;
+		width: 20px;
+		height: 20px;
+		background-color: black;
+		color: #fff;
+		margin: 2px;
+		text-align: center;
+		cursor: pointer;
+	}
+	#tab #li1{
+		background-color: orange;
+	}
+	#move{
+		position: absolute;
+		left: 10px;
+		bottom:20px;
+		
+	}
+	#prev,#next{
+		width: 10px;
+		height: 20px;
+		background-color: black;
+		color: #fff;
+		margin: 1px;
+		display: inline-block;
+		cursor: pointer;
+	}
+
+	</style>
+</head>
+<body>
+<div id="continer">
+	<div id="imgs">
+		<img src="img/1.jpg" id="img1">
+		<img src="img/2.jpg">
+		<img src="img/3.jpg">
+		<img src="img/4.jpg">
+	</div>
+	<ul id="tab">
+		<li id="li1">1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+
+	</ul>
+	<div id="move">
+		<span id="prev">&lt;</span>
+			<span id="next">&gt;</span>
+	</div>
+</div>
+<script >
+	var getElemById=function(id){
+	 	return document.getElementById(id);
+	 };
+	 var getElementsByTag=function(obj,tag){
+	 	return obj.getElementsByTagName(tag);
+
+	 };
+	var oContiner= getElemById("continer");
+	var oImgs= getElemById("imgs");
+	var oImg=getElementsByTag(oImgs,"img");
+	var oTab=getElemById("tab");
+	var aLi=getElementsByTag(oTab,"li");
+	var oPrev=getElemById("prev");
+	var oNext=getElemById("next");
+	var nowindex=0;
+	var timer;
+
+	
+	 var change=function(idx){
+	 	nowindex=idx;
+		for(var i = 0; i < aLi.length; i++){
+	 	 		oImg[i].style.display="none";
+	 	 		aLi[i].style.backgroundColor="#000";
+	 	 	}
+	 	 		oImg[idx].style.display="block";
+	 	 		aLi[idx].style.backgroundColor="orange";
+
+	 };
+	 for (var i = 0; i < aLi.length; i++) {
+ 		aLi[i].index=i;
+	 	 aLi[i].onmouseover=function(){ 
+	 	 
+	 	 	change(this.index);
+	 };
+	 }
+	 oPrev.onclick=oNext.onclick=function(){
+	 	if(this==oPrev){
+	 		nowindex--;
+	 		if(nowindex==-1){
+	 			nowindex=aLi.length-1;
+	 		}
+
+	 		change(nowindex);
+	 	}else{
+	 		nowindex++;
+	 		if(nowindex==aLi.length){
+	 			nowindex=0;
+	 		}
+	 		change(nowindex);
+	 			
+
+	 	}
+	 }
+	  var timer=setInterval(function(){
+	  			oNext.onclick();
+	  		},1000);
+	  oContiner.onmouseover=function(){
+	  		clearInterval(timer);
+	  };
+	    oContiner.onmouseout=function(){
+ 		 	timer=setInterval(function(){
+	  			oNext.onclick();
+	  		},1000);
+	 };
+
+
+
+	
+
+</script>
+</body>
+</html>
