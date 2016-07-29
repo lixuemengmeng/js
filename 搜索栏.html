@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>taobao</title>
+	<meta charset="utf-8">
+	<style >	
+	body{
+			height: 2000px;
+		}
+		*{
+			margin: 0px;
+			padding: 0px;
+
+		}
+		#header{
+			height: 200px;
+			background-color: gray;
+
+
+		}
+		#search{
+			width: 100%;
+			height: 100px;
+			background-color: red;
+		}
+		.fixed{
+			position: fixed;
+			top:0px;
+			left: 0px;
+		}
+	</style>
+
+</head>
+<body>
+	<div id="header"></div>
+	<div id="search"></div>
+<script >
+	var oSearch =document.getElementById("search");
+	var iSearchTop=oSearch.offsetTop;
+	var isFixed=false;
+
+	window.onscroll=function(){
+		var iScrollTop=document.documentElement.scrollTop||document.body.scrollTop//获取滚动条距上部的距离
+		if(iScrollTop>=iSearchTop && !isFixed){
+			console.log(111);
+			oSearch.className="fixed";
+			isFixed=true;
+		}
+		else if(iScrollTop<iSearchTop  && isFixed){
+			oSearch.className="";
+			console.log(22);
+			isFixed =false;
+		}
+
+	};
+</script>
+</body>
+</html>
