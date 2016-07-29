@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset="utf-8">
+	<title>图片滑动</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#container{
+		width: 520px;
+		height: 280px;
+		margin: 50px auto;
+		position: relative;
+		overflow: hidden;
+	}
+	#container img{
+		width: 520px;
+		height: 280px;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	</style>
+</head>
+
+<body onselectstart='return false;'>
+<!-- 禁止鼠标选中文字 -->
+<div id="container">
+	<img src="img/1.jpg" style="z-index:4">
+	<img src="img/2.jpg" style="z-index:3">
+	<img src="img/3.jpg" style="z-index:2">
+	<img src="img/4.jpg" style="z-index:1">
+</div>
+<script src="wichung-1.0.js"></script>
+<script>
+	var oContianer=document.getElementById("container");
+	var aImg=oContianer.getElementsByTagName("img");
+	var flag=false;
+	oContianer.onclick=function(e){
+		console.log(flag);
+		if(flag==true){
+			return;
+		}
+		flag=true;
+
+		var target=e.target||window.event.srcElement;
+		var data={opacity:0};
+
+	if( target!=oContianer){
+		var load=Math.floor(Math.random()*4);	
+		switch(load){
+			case 0:
+			data.top=-aImg[0].offsetHeight;
+			break;
+			case 1:
+			data.top=aImg[0].offsetHeight;
+			break;
+			case 2:
+			data.left=-aImg[0].offsetWidth;
+			break;
+			case 3:
+			data.left=aImg[0].offsetWidth;
+			break;
+		}
+	
+			animate(target,data,function(){
+				target.style.left=0;
+				target.style.top=0;
+				for(var i=0;i<aImg.length;i++){
+					aImg[i].style.zIndex++;
+
+				}
+				target.style.zIndex=1;
+				target.style.opacity=1;
+				target.style.filter="alpha(opacity=100)";
+				flag=false;
+
+			});
+		
+	}	
+
+	};
+</script>
+</body>
+</html>
