@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>照片墙</title>
+	<style >
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	html,body{
+		width: 100%;
+		height: 100%;
+	}
+	#contianer{
+		width: 100%;
+		height: 100%;
+		background: url(imgs/bg.jpg) ;
+		position: relative;
+	}
+	#contianer img{
+		position: absolute;
+	/*	left: 0;
+		top:0;*/
+			width: 125px;
+			height: 125px;
+			border:5px solid #fff;
+	}
+
+
+	</style>
+</head>
+<body>
+<div id="contianer">
+	
+</div>
+<script src="wichung-1.0.js"></script>
+<script >
+	var oContianer=document.getElementById('contianer');
+	var row=3,col=6;
+	var count=0;
+	var aImg=[];
+	var index=0;
+	var img_Height=135;
+	var img_Width=135;
+	var zIndex=0;
+	for(var i=0;i<row*col;i++){
+		var oImg=new Image();
+		oImg.onload=function(){
+			count++;
+			if(count==row*col){
+				loadSuccess();
+			}
+			
+		};
+		oImg.src="imgs/"+(i+1)+".jpg";
+			aImg.push(oImg);
+	}
+	function loadSuccess(){
+		// var target=e.target||window.event.srcElement;
+		var oRowGap=(oContianer.offsetHeight-row*img_Height)/(row+1);
+		console.log(oRowGap);
+		var  oColGap=(oContianer.offsetWidth-col*img_Width)/(col+1);
+		for(var i=0;i<row;i++){
+			for(var j=0;j<col;j++){
+				aImg[index].style.top=oRowGap+(img_Height+oRowGap)*i +"px";
+				aImg[index].style.left=oColGap+(img_Width+oColGap)*j+"px";
+				
+				oContianer.appendChild(aImg[index]);
+				index++;
+			}
+		}
+
+
+	}
+	 oContianer.onmouseover=function(e){
+		var target=e.target||window.event.srcElement;
+		if(target!=oContianer){
+			target.style.zIndex = ++zIndex;
+			animate(target,{
+				width:200,
+				height:200,
+				marginTop:-30,
+				marginLeft:-30
+
+			});
+
+		}
+	};
+	 oContianer.onmouseout=function(e){
+		var target=e.target||window.event.srcElement;
+		if(target!=oContianer){
+			
+			animate(target,{
+				width:img_Width,
+				height:img_Height,
+				marginTop:0,
+				marginLeft:0
+
+			});
+
+		}
+	};
+	
+</script>
+</body>
+</html>
