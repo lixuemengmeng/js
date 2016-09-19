@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+	</title>
+	<style type="text/css">
+	*{
+		margin: 0px;
+		padding: 0px;
+	}
+	#search-div{
+		margin:100px auto;
+	}
+		#search-text{
+			width: 300px;
+			height: 30px;
+			
+		}
+		#search-result{
+			width: 300px;
+			
+			list-style: none;
+			display: none;
+
+		}
+		#search-result li{
+			width: 300px;
+			height: 20px;
+			background: #ccc;
+		}
+	</style>
+</head>
+<body>
+<div id='search-div'>
+	<input type="text" name="search" id='search-text'>
+	<ul id='search-result'>
+	<!-- <li>1</li>
+	<li>2</li>
+	<li>3</li> -->
+</ul>
+</div>
+<script type="text/javascript">
+	var oSearchText=document.getElementById('search-text');
+	var oSearchResult=document.getElementById('search-result');
+	var arr=['iphone5s','iphone6','iphone6s','iphone7','sums6','sums7'];
+	
+	
+		
+	oSearchText.onkeyup=function(){
+		oSearchResult.innerHTML='';
+		if(this.value){
+			console.log(this.value);
+		for(var i=0;i<arr.length;i++){
+			if(arr[i].indexOf(this.value)!=-1){
+			var ali=document.createElement('li');
+			ali.innerHTML=arr[i];
+			ali.onclick=function(){
+			oSearchText.value=this.innerHTML;
+			oSearchResult.style.display='none';
+				}
+			oSearchResult.appendChild(ali);	
+			}
+			oSearchResult.style.display='block';
+		}
+		}
+		
+		
+
+	}
+</script>
+</body>
+</html>
