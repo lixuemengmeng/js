@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>放大镜</title>
+	<style >
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#small-pic{
+		height: 140px;
+		width: 260px;
+		float: left;
+		position: relative;
+		margin-right: 10px;
+	}
+	#small-img{
+		height: 140px;
+		width: 260px;
+	}
+	#drag{
+		height: 30px;
+		width: 60px;
+		position: absolute;
+		background-color: #ccc;
+		opacity:0.8;
+		filter:alpha(opacity=80);
+		z-index: 1px;
+		position: absolute;
+		display: none;
+	}
+	#mask{
+		height: 140px;
+		width: 260px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background: red;
+		z-index: 2;
+		opacity:0;
+		filter:alpha(opacity=0);
+
+	}
+	#big-pic{
+		height: 140px;
+		width: 260px;
+		float: left;
+		position: relative;
+		display: none;
+		overflow:hidden;
+	}
+	#big-img{
+		height: 280px;
+		width: 520px;
+		position: absolute;
+	}
+
+	</style>
+</head>
+<body>
+<div id="small-pic">
+	<div id="drag"></div>
+	<div id="mask"></div>
+	<img id="small-img" src="img/3.jpg">
+</div>
+<div id="big-pic">
+	<img id="big-img" src="img/3.jpg">
+</div>
+	<script >
+	var oSmallPic =document.getElementById('small-pic');
+	var oDrag =document.getElementById("drag");
+	var oSmallImg=document.getElementById("small-img");
+	var oBigPic =document.getElementById("big-pic");
+	var oBigImg =document.getElementById("big-img");
+	var oMask =document.getElementById("mask");
+	 mask.onmouseover=function(){
+	 	oDrag.style.display="block";
+	 	oBigPic.style.display="block";
+
+	 };
+	  mask.onmouseout=function(){
+	 	oDrag.style.display="none";
+	 	oBigPic.style.display="none";
+
+	 };
+	  mask.onmousemove=function(e){
+	  	e=e||event;
+	  	var left=e.clientX - oDrag.offsetWidth/2 ;
+	  	var top=e.clientY- oDrag.offsetHeight/2;
+	  	  if( left >=mask.offsetWidth-oDrag.offsetWidth){
+	  	  	left = mask.offsetWidth-oDrag.offsetWidth +"px";
+	  	  }
+	  	  if(left <=0){
+	  	  	left=0;
+	  	  }
+	  	   if( top>=mask.offsetHeight-oDrag.offsetHeight){
+	  	  	top = mask.offsetHeight-oDrag.offsetHeight +"px";
+	  	  }
+	  	  if(top <=0){
+	  	  	top=0;
+	  	  }
+			oDrag.style.left = left+"px";
+	  	  oDrag.style.top = top+"px";
+	  	  var iScaleX=left/(mask.offsetWidth-oDrag.offsetWidth);
+	  	   var iScaleY=top/(mask.offsetHeight-oDrag.offsetHeight);
+	  	    oBigImg.style.left=- iScaleX*(oBigImg.offsetWidth-oBigPic.offsetWidth) +"px";
+	      	oBigImg.style.top=- iScaleY*(oBigImg.offsetHeight-oBigPic.offsetHeight) +"px";
+
+	  }; 
+	  	
+	</script>
+
+</body>
+</html>
